@@ -1,0 +1,20 @@
+name: Netlify Site Checks
+
+# Shared deploy checks (dev-env#193). No check-deploy-preview.sh here: baseline check only.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  statuses: read
+
+jobs:
+  netlify-site-checks:
+    uses: smartwatermelon/github-workflows/.github/workflows/netlify-site-checks.yml@netlify-site-checks-v1
+    with:
+      netlify-site: jordan-paddock
+    secrets:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
